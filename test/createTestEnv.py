@@ -6,7 +6,7 @@ import shutil
 # location of creating test env
 path = os.path.join(os.path.expanduser('~'),"test")
 
-deep = 1
+deep = 2
 
 content = {"txt":"human readable text Layer {}",
             "xml":"<apt> human readable text <al> Layer {} </al> </apt>",
@@ -16,11 +16,11 @@ content = {"txt":"human readable text Layer {}",
 
 def createLayer(path,remainLayer):
     global content
+    print("Remain Layer:",remainLayer)
+
     os.mkdir(path)
 
     file_count = randint(0,6)
-    
-
     for i in range(file_count):
         file_ext, file_content = list(content.items())[randint(0,len(content.keys())-1)]
         file_name = "file"+str(i)+"."+file_ext
@@ -30,7 +30,7 @@ def createLayer(path,remainLayer):
             print(file_content.format(remainLayer), file=newFile)
     
     if remainLayer:     
-        directory_count = randint(0,3)
+        directory_count = randint(1,3)
         for i in range(directory_count):
             dirname_path = os.path.join(path, "goDeep"+str(remainLayer-1)+"_"+str(i))
             createLayer(dirname_path,remainLayer-1)
