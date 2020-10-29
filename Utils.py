@@ -31,8 +31,8 @@ file_extentions = [ '7z', 'ai', 'aif', 'apk', 'arj', 'asp', 'aspx', 'avi',
                     'ods', 'oft', 'ogg', 'ost', 'pdf', 'php', 'pkg', 'pl', 
                     'png', 'pps', 'ppt', 'pptx', 'py', 'rar', 'rpm', 'rss', 
                     'rtf', 'sh', 'sql', 'svg', 'swift', 'sys', 'tar', 'tif', 
-                    'tiff', 'toast', 'vb', 'wav', 'wma', 'wpl', 'wsf', 'xhtml', 
-                    'xls', 'xml', 'xslm', 'xslx', 'zip']
+                    'tiff', 'toast', 'txt','vb', 'wav', 'wma', 'wpl', 'wsf', 
+                    'xhtml', 'xls', 'xml', 'xslm', 'xslx', 'zip']
 
 
 
