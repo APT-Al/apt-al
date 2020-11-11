@@ -4,9 +4,8 @@ import base64
 from queue import Queue
 
 import Utils
-sys.path.append(os.path.abspath('../hasp'))
-from AESCipher import AESCipher
-from RSACipher import RSACipher
+from hasp.AESCipher import AESCipher
+from hasp.RSACipher import RSACipher
 from aptal import APTAl
 
 def isInTargetFiles(_extention):

@@ -5,8 +5,7 @@ from queue import Queue
 from threading import Thread
 
 import Utils
-sys.path.append(os.path.abspath('../hasp'))
-from AESCipher import AESCipher
+from hasp.AESCipher import AESCipher
 
 class APTAl(Thread):
     """
