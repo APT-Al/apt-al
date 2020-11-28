@@ -4,7 +4,6 @@ import random
 from queue import Queue
 from threading import Thread
 
-import Utils
 from hasp.AESCipher import AESCipher
 
 class APTAl(Thread):

