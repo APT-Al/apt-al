@@ -1,7 +1,7 @@
 from base64 import b64decode
 
 import starter
-from Utils import root_directory
+from utils import root_directory
 
 with open("config.txt","r") as configFile:
     version = b64decode(configFile.readline()).strip().decode("utf-8")

