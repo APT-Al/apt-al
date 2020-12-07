@@ -1,6 +1,7 @@
 from base64 import b64decode
 
 import starter
+import guiMode
 from utils import root_directory
 
 with open("config.txt","r") as configFile:
