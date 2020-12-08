@@ -53,8 +53,3 @@ class PostInfection(object):
         with open(_autorun_file_path,"w") as autorunfile:
             autorunfile.write(keyspath)
 
-    def calculateRemaningTime(start_time, doubling_time):
-        now = datetime.now()
-        end = start_time + timedelta(days=doubling_time) 
-        remain = end - now
-        return remain

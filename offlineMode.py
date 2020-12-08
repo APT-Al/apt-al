@@ -5,8 +5,8 @@ if guiMode.checkFirstTime():
     guiMode.displayInfoGUI()
 else:
     print("NONONO")
-exit()
 
+exit()
 
 import starter
 import utils

