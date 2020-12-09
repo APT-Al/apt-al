@@ -6,9 +6,7 @@ from PyQt5 import QtWidgets
 from PyQt5 import uic
 from PyQt5 import QtCore
 
-import asyncio
-from random import randint
-
+from utils import resourcePath
 
 class SetRemainingTimeThreadClass(QtCore.QThread):
     def __init__(self, lcd, start_time_str):
@@ -60,16 +58,6 @@ def displayInfoGUI():
     app = QtWidgets.QApplication(sys.argv)
     window = InfoGUI(aptalgui_path, start_time_str)
     sys.exit(app.exec_())
-
-def resourcePath(filename, folders = ""):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, folders, filename)
 
 def checkFirstTime():
     if len(sys.argv) > 1:

@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import datetime
 
 who_we_are = "APT-Al"
@@ -53,3 +54,20 @@ b4DvLhmsrITAppF9TATh1amnze+Gbupxm68hn+XTecyWFsXz7kIfsycT/OmwW2vm\n\
 hjPH7H5Q4TqpxEkDDc3thRcr47wZtiYGeanc/UOsNabxyTahKGPFYooVHaoj9pl5\n\
 s+osKiL/Se+8eKHxt9JgP1tUXYMZbfNoo0q0QkIfl3Q8Js+lsOqVP+cCAwEAAQ==\n\
 -----END RSA PUBLIC KEY-----" # XXXX
+
+
+
+############# COMMON FUNCTIONS ################
+
+def resourcePath(filename, folders=""):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    for fol in folders:
+        base_path = os.path.join(base_path,fol)
+
+    return os.path.join(base_path, filename) 
