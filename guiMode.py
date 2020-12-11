@@ -16,7 +16,6 @@ class SetRemainingTimeThreadClass(QtCore.QThread):
 
     def run(self):
         start_time = datetime.strptime(self.start_time_str, '%d/%m/%Y %H:%M:%S')
-        #remain_time = self.calculateRemaningTime(start_time,1)
         remain_time = self.calculateRemaningTime(start_time,1)
 
         while True:
@@ -52,8 +51,10 @@ def readInfectionDate(path):
         start_time_str = " ".join(datefile.readline().strip().split()[-2:])
     return start_time_str
 
-def displayInfoGUI():
-    start_time_str = readInfectionDate(sys.argv[1])    
+def displayInfoGUI(aeskeyfile=""):
+    if aeskeyfile == "":
+        aeskeyfile = sys.argv[1]
+    start_time_str = readInfectionDate(aeskeyfile)    
     aptalgui_path = resourcePath("aptal.ui")
     app = QtWidgets.QApplication(sys.argv)
     window = InfoGUI(aptalgui_path, start_time_str)
