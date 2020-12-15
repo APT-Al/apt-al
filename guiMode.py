@@ -51,18 +51,9 @@ def readInfectionDate(path):
         start_time_str = " ".join(datefile.readline().strip().split()[-2:])
     return start_time_str
 
-def displayInfoGUI(aeskeyfile=""):
-    if aeskeyfile == "":
-        aeskeyfile = sys.argv[1]
+def displayInfoGUI(aeskeyfile):
     start_time_str = readInfectionDate(aeskeyfile)    
     aptalgui_path = resourcePath("aptal.ui")
     app = QtWidgets.QApplication(sys.argv)
     window = InfoGUI(aptalgui_path, start_time_str)
     sys.exit(app.exec_())
-
-def checkFirstTime():
-    if len(sys.argv) > 1:
-        print("print second time show only gui")
-        return True
-    print("FIRST TIME hack it")
-    return False

