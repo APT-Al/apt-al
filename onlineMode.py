@@ -8,9 +8,10 @@ from postInfection import PostInfection
 from utils import root_directory, aesIV_file_store_path,when_did_i_work
 
 if starter.checkFirstTime("online"):
+    # victimcomputer> .\dist\onlineMode.exe $(pwd)
 
     working_directory = sys.argv[1]
-    config_path = os.path.join(working_directory,"config.txt")
+    config_path = os.path.join(working_directory,"1_config.txt")
 
     with open(config_path,"r") as configFile:
         version = b64decode(configFile.readline()).strip().decode("utf-8")
