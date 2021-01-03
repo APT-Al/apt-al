@@ -4,7 +4,7 @@ import ctypes
 import base64
 from shutil import copyfile
 
-from utils import resourcePath, aesIV_file_store_path
+from utils import resourcePath, aesIV_file_store_path, version
 from hasp.RSACipher import RSACipher
 class PostInfection(object):
 

