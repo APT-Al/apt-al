@@ -114,6 +114,11 @@ def checkFirstTime(mode):
         else:
             print("FIRST TIME")
             return True
+    elif mode == "offline":
+        if whichFile():
+            return False
+        else:
+            return True
 
 def whichFile():
     for filee in os.listdir():
